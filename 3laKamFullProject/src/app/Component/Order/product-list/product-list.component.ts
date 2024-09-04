@@ -16,6 +16,7 @@ import { USDtoEGPPipe } from '../../../Pipes/usdto-egp.pipe';
 export class ProductListComponent {
   prdList:Iproduct[];
   catList:Icategory[];
+  catFilter:Iproduct[];
   temp:Iproduct[];
   selectedCatID:number=0;
   orderTotalPrice:number=0;
@@ -34,7 +35,8 @@ export class ProductListComponent {
       {id:2,name:'Taplet'},
       {id:3,name:'Mopile'}
     ]
-     this.temp = this.prdList
+     this.catFilter=this.prdList;
+     this.temp = this.catFilter;
     this.orderDate=new Date();
 
   }
@@ -50,11 +52,18 @@ export class ProductListComponent {
 
   search(element:string){
     if(element.length==0)
-      this.temp=this.prdList;
+      this.temp=this.catFilter;
     else
-      this.temp=this.prdList.filter(n=>n.name.toLowerCase().startsWith(element.toLowerCase()))
+      this.temp=this.catFilter.filter(n=>n.name.toLowerCase().startsWith(element.toLowerCase()))
 
 
+  }
+  filterByCatID()
+  {
+    if(this.selectedCatID==0)
+      this.catFilter=this.prdList;
+    else
+    this.catFilter= this.prdList.filter(i=>i.categoryID==this.selectedCatID)
   }
 
 }

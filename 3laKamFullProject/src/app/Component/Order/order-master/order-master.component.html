@@ -1,0 +1,19 @@
+<h2>Create your product: </h2>
+<br>
+<section class="row">
+<div class="col-5">
+    <label for="" class="form-label"> Search </label>
+    <input #searchElement type="text" class="form-control" />
+</div>
+
+<div class="col-5">
+    <label for="cat" class="form-label">Category</label>
+    <select class="form-select form-select-lg" name="cat" id="cat" [(ngModel)]="selectedCatID" >
+        <option selected value="0">Select one</option>
+        <option *ngFor="let cat of catList" value="{{cat.id}}">{{cat.name}}</option>
+    </select>
+</div>
+</section>
+<app-product-list></app-product-list>
+<hr>
+<h3>Order total price {{orderTotalPrice}} = </h3>
