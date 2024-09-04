@@ -1,0 +1,64 @@
+<br>
+<section class="row">
+<div class="col-5">
+    <label for="" class="form-label"> Search </label>
+    <input #searchElement type="text" class="form-control" (input)="search(searchElement.value)"/>
+</div>
+
+<div class="col-5">
+    <label for="cat" class="form-label">Category</label>
+    <select class="form-select form-select-lg" name="cat" id="cat" [(ngModel)]="selectedCatID">
+        <option selected value="0">Select one</option>
+        <option *ngFor="let cat of catList" value="{{cat.id}}">{{cat.name}}</option>
+    </select>
+</div>
+</section>
+
+<hr>
+Today's Date: {{orderDate|date}}
+<div>
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Av. Quantity</th>
+                <th>Price in USD</th>
+                <th>Price in EGP</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- [class.d-none]="item.categoryID!=selectedCatID"
+            [style.background-color]="(item.quantity==0)?'yellow':'light-gray'" -->
+            <ng-container *ngFor="let item of temp ;let i = index; trackBy:prdtracByFn">
+                <tr [class.d-none]="item.categoryID!=selectedCatID && selectedCatID!=0"
+                [class.table-warning]="item.quantity==0"
+                [class.table-primary]="item.quantity!=0">
+                    <td>{{i+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td ><img LightBox="red" LightBox2="green" [src]="item.imgURL" alt="image"></td>
+                    <td>
+                        <!-- <div *ngIf="item.quantity!=0">{{item.quantity}}</div>
+                    <div *ngIf="item.quantity==0">Out of Stock</div> -->
+                        <!-- <div *ngIf="item.quantity!=0;else outOfStock">{{item.quantity}}</div>
+                    <ng-template #outOfStock>Out of Stock</ng-template> -->
+                        <ng-container [ngSwitch]="item.quantity">
+                            <div [ngClass]="{'text-danger': true}" *ngSwitchCase="0">Out Of Stock</div>
+                            <div [ngClass]="{'text-warning': true}" *ngSwitchCase="1">Last One</div>
+                            <div [ngClass]="{'text-success': true}" *ngSwitchDefault>{{item.quantity}}</div>
+                        </ng-container>
+                    </td>
+                    <td>{{ item.price | currency:'USD':'code' }}</td>
+                    <td>{{ item.price | USDtoEGP:44 | currency:'EGP' }}</td>
+                    <td><input #count class="form-control" type="number"></td>
+                    <td><button type="button" class="btn btn-secondary"
+                            (click)="buy(item.price,count.value)">Buy</button></td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+<h3>Order total price in USD = {{orderTotalPrice | currency: 'USD'}}</h3>
+<h3>Order total price in EGP = {{orderTotalPrice | USDtoEGP | currency: 'EGP'}}</h3>

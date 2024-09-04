@@ -1,0 +1,9 @@
+<h1>{{storeInfo.name}}</h1>
+<img *ngIf="isShown" [src]="storeInfo.imgURL" alt="">
+<br>
+ <button type="button" class="btn btn-primary" (click)="togle()">Toggel</button>
+<br>
+<h2>Brands:</h2>
+<ul>
+    <li *ngFor="let item of storeInfo.Brands">{{item}}</li>
+</ul>
