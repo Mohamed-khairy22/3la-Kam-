@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Iproduct } from '../../../Model/iproduct';
 import { CommonModule } from '@angular/common';
 import { Icategory } from '../../../Model/icategory';
@@ -13,12 +13,12 @@ import { USDtoEGPPipe } from '../../../Pipes/usdto-egp.pipe';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnChanges {
   prdList:Iproduct[];
   catList:Icategory[];
   catFilter:Iproduct[];
   temp:Iproduct[];
-  selectedCatID:number=0;
+  @Input() sentCatID:number=0;
   orderTotalPrice:number=0;
   orderDate:Date;
   constructor(){
@@ -40,6 +40,9 @@ export class ProductListComponent {
     this.orderDate=new Date();
 
   }
+  ngOnChanges(): void {
+    this.filterByCatID();  
+  }
   prdtracByFn(index:number,prd:Iproduct):number
   {
     return prd.id;
@@ -49,7 +52,13 @@ export class ProductListComponent {
     this.orderTotalPrice+=qCount*price;
   }
   
-
+  private filterByCatID()
+  {
+    if(this.sentCatID==0)
+      this.catFilter=this.prdList;
+    else
+    this.catFilter= this.prdList.filter(i=>i.categoryID==this.sentCatID)
+  }
   search(element:string){
     if(element.length==0)
       this.temp=this.catFilter;
@@ -58,12 +67,6 @@ export class ProductListComponent {
 
 
   }
-  filterByCatID()
-  {
-    if(this.selectedCatID==0)
-      this.catFilter=this.prdList;
-    else
-    this.catFilter= this.prdList.filter(i=>i.categoryID==this.selectedCatID)
-  }
+   
 
 }

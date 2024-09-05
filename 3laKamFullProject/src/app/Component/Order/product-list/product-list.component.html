@@ -7,7 +7,7 @@
     
     <div class="col-5">
         <label for="cat" class="form-label">Category</label>
-        <select class="form-select form-select-lg" name="cat" id="cat" [(ngModel)]="selectedCatID" (change)="filterByCatID()">
+        <select class="form-select form-select-lg" name="cat" id="cat" [(ngModel)]="sentCatID" (change)="filterByCatID()">
             <option selected value="0">Select one</option>
             <option *ngFor="let cat of catList" value="{{cat.id}}">{{cat.name}}</option>
         </select>
@@ -15,10 +15,10 @@
     </section> -->
 <hr>
 Today's Date: {{orderDate|date}}
-<div>
+<div class="table-responsive">
     <table class="table ">
         <thead>
-            <tr>
+            <tr  class="bg-primary p-3">
                 <th>#</th>
                 <th>Name</th>
                 <th>Image</th>
@@ -26,13 +26,14 @@ Today's Date: {{orderDate|date}}
                 <th>Price in USD</th>
                 <th>Price in EGP</th>
                 <th>Count</th>
+                <th>Buy</th>
             </tr>
         </thead>
         <tbody>
-            <!-- [class.d-none]="item.categoryID!=selectedCatID"
+            <!-- [class.d-none]="item.categoryID!=sentCatID"
             [style.background-color]="(item.quantity==0)?'yellow':'light-gray'" -->
-            <ng-container *ngFor="let item of temp ;let i = index; trackBy:prdtracByFn">
-                <tr [class.d-none]="item.categoryID!=selectedCatID && selectedCatID!=0"
+            <ng-container *ngFor="let item of catFilter ;let i = index; trackBy:prdtracByFn">
+                <tr [class.d-none]="item.categoryID!=sentCatID && sentCatID!=0"
                 [class.table-warning]="item.quantity==0"
                 [class.table-primary]="item.quantity!=0">
                     <td>{{i+1}}</td>
@@ -59,3 +60,6 @@ Today's Date: {{orderDate|date}}
         </tbody>
     </table>
 </div>
+<br>
+<h3 class="text-danger">for test total price = {{orderTotalPrice}}  </h3>
+

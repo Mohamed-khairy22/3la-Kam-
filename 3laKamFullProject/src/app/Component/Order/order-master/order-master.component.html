@@ -9,11 +9,14 @@
 <div class="col-5">
     <label for="cat" class="form-label">Category</label>
     <select class="form-select form-select-lg" name="cat" id="cat" [(ngModel)]="selectedCatID" >
-        <option selected value="0">Select one</option>
+        <option selected value="0">All</option>
         <option *ngFor="let cat of catList" value="{{cat.id}}">{{cat.name}}</option>
     </select>
 </div>
 </section>
-<app-product-list></app-product-list>
+<br>
+<div class="bg-warning">
+    <app-product-list [sentCatID]="selectedCatID"></app-product-list>
+</div>
 <hr>
 <h3>Order total price {{orderTotalPrice}} = </h3>
