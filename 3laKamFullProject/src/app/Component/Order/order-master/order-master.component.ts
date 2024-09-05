@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { ProductListComponent } from "../product-list/product-list.component";
 import { Icategory } from '../../../Model/icategory';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,10 @@ export class OrderMasterComponent {
       {id:2,name:'Taplet'},
       {id:3,name:'Mopile'}
     ]
+  }
+  totalPrice(price:number)
+  {
+    this.orderTotalPrice=price;
   }
 
 }
