@@ -19,7 +19,7 @@
     <app-product-list [sentCatID]="selectedCatID" (myOrder)="addToCart($event)"></app-product-list>
 </div>
 <hr>
-<h3>Orders in Cart:   </h3>
+<h3>Orders in Cart: {{myCart.length}}  </h3>
 
 <div
     class="table-responsive"
@@ -42,7 +42,7 @@
                 <td >{{i+1}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.price}}</td>
-                <td><input #newCount type="number" class="form-control" value="{{item.count}}"></td>
+                <td><input #newCount type="number" class="form-control" value="{{item.count}}" (input)="changeCount(i,newCount.value)"></td>
                 <td>{{item.price * item.count}}</td>
                 <td><button class="btn btn-secondary" (click)="deleteFromCart(item)" >Delete</button></td>
             </tr>

@@ -54,7 +54,8 @@ Today's Date: {{orderDate|date}}
                     <td>{{ item.price | USDtoEGP:44 | currency:'EGP' }}</td>
                     <td><input #count class="form-control" type="number"></td>
                     <td><button type="button" class="btn btn-secondary"
-                            (click)="addToCart(item.id,item.name,item.price,count.value)">Add</button></td>
+                            (click)="addToCart(item.id,item.name,item.price,count.value)"
+                            >Add</button></td>
                 </tr>
             </ng-container>
         </tbody>
