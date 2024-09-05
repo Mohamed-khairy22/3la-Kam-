@@ -5,6 +5,7 @@ import { Icategory } from '../../../Model/icategory';
 import { FormsModule } from '@angular/forms';
 import { LightBoxDirective } from '../../../Directives/light-box.directive';
 import { USDtoEGPPipe } from '../../../Pipes/usdto-egp.pipe';
+import { NewCart } from '../../../ViewModel/new-cart';
 
 @Component({
   selector: 'app-product-list',
@@ -19,11 +20,11 @@ export class ProductListComponent implements OnChanges {
   catFilter:Iproduct[];
   temp:Iproduct[];
   @Input() sentCatID:number=0;
-  @Output('TotalPrice') totalPriceChange:EventEmitter<number>;
+  @Output('myOrder') myOrder:EventEmitter<NewCart>;
   orderTotalPrice:number=0;
   orderDate:Date;
   constructor(){
-    this.totalPriceChange = new EventEmitter<number>();
+    this.myOrder = new EventEmitter<NewCart>();
     this.prdList=[
       {id:1,name:'Lenovo ideapad 320 Laptop',price:17000,quantity:1,imgURL:"https://fakeimg.pl/200x100",categoryID:1},
       {id:2,name:'Apple Macbook Laptop',price:20000,quantity:0,imgURL:"https://fakeimg.pl/200x100",categoryID:1},
@@ -49,10 +50,9 @@ export class ProductListComponent implements OnChanges {
   {
     return prd.id;
   }
-  buy(price:number,count:any){
-    let qCount=Number(count);
-    this.orderTotalPrice+=qCount*price;
-    this.totalPriceChange.emit(this.orderTotalPrice)
+  addToCart(Id:number,name:string,price:number,count:any){
+    let number:number=+count;
+    this.myOrder.emit({id:Id,name:name,price:price,count:number});
   }
   
   private filterByCatID()

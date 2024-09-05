@@ -16,10 +16,39 @@
 </section>
 <br>
 <div class="bg-warning">
-    <app-product-list [sentCatID]="selectedCatID" (TotalPrice)="totalPrice($event)"></app-product-list>
+    <app-product-list [sentCatID]="selectedCatID" (myOrder)="addToCart($event)"></app-product-list>
 </div>
 <hr>
-<h3>Enter Your Name </h3>
-<input #changeName type="text" class="form-control" >
+<h3>Orders in Cart:   </h3>
+
+<div
+    class="table-responsive"
+>
+    <table
+        class="table table-primary"
+    >
+        <thead>
+            <tr *ngIf="myCart.length!=0">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Count</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="" *ngFor="let item of myCart ;let i =index" >
+                <td >{{i+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td><input #newCount type="number" class="form-control" value="{{item.count}}"></td>
+                <td>{{item.price * item.count}}</td>
+                <td><button class="btn btn-secondary" (click)="deleteFromCart(item)" >Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
 <h3>Order total price: {{orderTotalPrice}} </h3>

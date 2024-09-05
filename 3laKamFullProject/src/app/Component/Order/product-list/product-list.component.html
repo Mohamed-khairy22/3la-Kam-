@@ -26,7 +26,7 @@ Today's Date: {{orderDate|date}}
                 <th>Price in USD</th>
                 <th>Price in EGP</th>
                 <th>Count</th>
-                <th>Buy</th>
+                <th>Add to Cart</th>
             </tr>
         </thead>
         <tbody>
@@ -54,7 +54,7 @@ Today's Date: {{orderDate|date}}
                     <td>{{ item.price | USDtoEGP:44 | currency:'EGP' }}</td>
                     <td><input #count class="form-control" type="number"></td>
                     <td><button type="button" class="btn btn-secondary"
-                            (click)="buy(item.price,count.value)">Buy</button></td>
+                            (click)="addToCart(item.id,item.name,item.price,count.value)">Add</button></td>
                 </tr>
             </ng-container>
         </tbody>
