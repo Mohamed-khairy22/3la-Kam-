@@ -16,29 +16,38 @@ export class StaticProductsService {
       {id:6,name:'Iphone 7 plus',price:11000,quantity:3,imgURL:"https://fakeimg.pl/200x100",categoryID:3}
     ]
   }
-  getAllProducts():Iproduct[]
+  getAllPrds():Iproduct[]
   {
     return this.prdList;
   }
-  getProducstByCategoryId(cID:number):Iproduct[]
+  getPrdByCatId(cID:number):Iproduct[]
   {
     if(cID==0)
       return this.prdList;
     else
       return this.prdList.filter(i=>i.categoryID==cID);
   }
-  getProductById(pId:number):Iproduct | null
+  getPrdById(pId:number):Iproduct | null
   {
     let prd = this.prdList.find(i=>i.id==pId);
     return prd?prd:null;
   }
+  getPrdByName(name:string,catId:number):Iproduct[]
+  {
+    let temp!:Iproduct[];
+    if(name.length==0)
+       temp=this.getPrdByCatId(catId);
+    else
+      temp=this.getPrdByCatId(catId).filter(n=>n.name.toLowerCase().startsWith(name.toLowerCase()));
+    return temp;
+}
   addProduct(prd:Iproduct)
   {
     this.prdList.push(prd);
   }
   updateProduct(prd:Iproduct,id:number)
   {
-    let Oldprd =this.getProductById(id)
+    let Oldprd =this.getPrdById(id)
     Oldprd!.categoryID=prd.categoryID;
     Oldprd!.imgURL=prd.imgURL;
     Oldprd!.name=prd.name;

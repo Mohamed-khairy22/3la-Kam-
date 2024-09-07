@@ -13,7 +13,7 @@ import { NewCart } from '../../../ViewModel/new-cart';
   templateUrl: './order-master.component.html',
   styleUrl: './order-master.component.scss'
 })
-export class OrderMasterComponent implements AfterViewInit {
+export class OrderMasterComponent  {
   catList: Icategory[];
   myCart: NewCart[] = [];
   selectedCatID: number = 0;
@@ -29,10 +29,14 @@ export class OrderMasterComponent implements AfterViewInit {
     ]
 
   }
-  ngAfterViewInit(): void {
-    this.changeYourName.nativeElement.value = "Enter your name here";
-    this.changeYourName.nativeElement.style.border = "2px solid red"
+  search(name:string):string
+  {
+    return name;
   }
+  // ngAfterViewInit(): void {
+  //   this.changeYourName.nativeElement.value = "Enter your name here";
+  //   this.changeYourName.nativeElement.style.border = "2px solid red"
+  // }
   addToCart(prd: NewCart) {
     let x: number = -1;
     for (let index = 0; index < this.myCart.length; index++) {

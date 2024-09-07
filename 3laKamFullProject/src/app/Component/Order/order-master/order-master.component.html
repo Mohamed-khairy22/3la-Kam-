@@ -3,7 +3,7 @@
 <section class="row">
 <div class="col-5">
     <label for="" class="form-label"> Search </label>
-    <input #searchElement type="text" class="form-control" />
+    <input #searchElement type="text" class="form-control" (input)="search(searchElement.value)" />
 </div>
 
 <div class="col-5">
@@ -16,7 +16,7 @@
 </section>
 <br>
 <div class="bg-warning">
-    <app-product-list [sentCatID]="selectedCatID" (myOrder)="addToCart($event)"></app-product-list>
+    <app-product-list [sentSearchName]="(searchElement.value)" [sentCatID]="selectedCatID" (myOrder)="addToCart($event)"></app-product-list>
 </div>
 <hr>
 <h3>Orders in Cart: {{myCart.length}}  </h3>
