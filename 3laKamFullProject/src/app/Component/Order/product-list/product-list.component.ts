@@ -7,6 +7,7 @@ import { LightBoxDirective } from '../../../Directives/light-box.directive';
 import { USDtoEGPPipe } from '../../../Pipes/usdto-egp.pipe';
 import { NewCart } from '../../../ViewModel/new-cart';
 import { StaticProductsService } from '../../../Services/static-products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -25,7 +26,7 @@ export class ProductListComponent implements OnChanges,OnInit {
   @Output('myOrder') myOrder:EventEmitter<NewCart>;
   orderTotalPrice:number=0;
   orderDate:Date;
-  constructor(private staticPrdService : StaticProductsService){
+  constructor(private staticPrdService : StaticProductsService,private router:Router){
     this.myOrder = new EventEmitter<NewCart>();
     // this.prdList=[
     //   {id:1,name:'Lenovo ideapad 320 Laptop',price:17000,quantity:1,imgURL:"https://fakeimg.pl/200x100",categoryID:1},
@@ -59,6 +60,10 @@ export class ProductListComponent implements OnChanges,OnInit {
   addToCart(Id:number,name:string,price:number,count:any){
     let number:number=+count;
     this.myOrder.emit({id:Id,name:name,price:price,count:number});
+  }
+  showDetails(pid:number)
+  {
+    this.router.navigate(['/products',pid]);
   }
 
   

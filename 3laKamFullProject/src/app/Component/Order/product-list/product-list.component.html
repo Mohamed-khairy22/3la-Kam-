@@ -26,6 +26,7 @@ Today's Date: {{orderDate|date}}
                 <th>Price in USD</th>
                 <th>Price in EGP</th>
                 <th>Count</th>
+                <th>Details</th>
                 <th>Add to Cart</th>
             </tr>
         </thead>
@@ -53,6 +54,8 @@ Today's Date: {{orderDate|date}}
                     <td>{{ item.price | currency:'USD':'code' }}</td>
                     <td>{{ item.price | USDtoEGP:44 | currency:'EGP' }}</td>
                     <td><input #count class="form-control" type="number"></td>
+                    <td><button type="button" class="btn btn-secondary"
+                        (click)="showDetails(item.id)">Details</button></td>
                     <td><button type="button" class="btn btn-secondary"
                             (click)="addToCart(item.id,item.name,item.price,count.value)"
                             >Add</button></td>
