@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Iproduct } from '../../../Model/iproduct';
 import { CommonModule } from '@angular/common';
 import { Icategory } from '../../../Model/icategory';
@@ -15,7 +15,7 @@ import { StaticProductsService } from '../../../Services/static-products.service
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
-export class ProductListComponent implements OnChanges {
+export class ProductListComponent implements OnChanges,OnInit {
   // prdList:Iproduct[];
   // catList:Icategory[];
    catFilter!:Iproduct[];
@@ -43,7 +43,9 @@ export class ProductListComponent implements OnChanges {
     //  this.catFilter=this.prdList;
     //  this.temp = this.catFilter;
     this.orderDate=new Date();
-
+  }
+  ngOnInit(): void {
+    this.catFilter=this.staticPrdService.getAllPrds();
   }
   ngOnChanges(): void {
     // this.filterByCatID();  
