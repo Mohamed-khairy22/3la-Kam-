@@ -58,4 +58,8 @@ export class StaticProductsService {
   {
     this.prdList= this.prdList.filter(p=>p.id!=id);
   }
+  getAllIds():number[]
+  {
+    return this.prdList.map(i=>i.id)
+  }
 }
