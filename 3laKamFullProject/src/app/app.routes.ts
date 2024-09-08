@@ -4,7 +4,6 @@ import { ProductListComponent } from './Component/Order/product-list/product-lis
 import { OrderMasterComponent } from './Component/Order/order-master/order-master.component';
 import { MainLayoutComponent } from './Component/main-layout/main-layout.component';
 import { LoginComponent } from './Component/login/login.component';
-import { Component } from '@angular/core';
 import { ProductDetailsComponent } from './Component/Order/product-details/product-details.component';
 
 export const routes: Routes = [
