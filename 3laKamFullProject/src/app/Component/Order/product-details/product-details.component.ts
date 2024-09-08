@@ -28,11 +28,8 @@ export class ProductDetailsComponent implements OnInit {
     // this.currPId = Number (this.activatedRoute.snapshot.paramMap.get('pid'))
     this.activatedRoute.paramMap.subscribe((paramMap)=>{
       this.currPId= Number (paramMap.get('pid'))
-    });this.activatedRoute.paramMap.subscribe(p=>{
-      this.currPId= Number(p.get('pid'))
-    })
-
-     this.prd =this.prdService.getPrdById(this.currPId)
+      this.prd =this.prdService.getPrdById(this.currPId)
+    });
     
     }
     goBack()

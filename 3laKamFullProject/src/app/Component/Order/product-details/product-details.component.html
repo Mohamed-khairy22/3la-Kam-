@@ -6,8 +6,8 @@
         <h4 class="card-title">Av. Quantity: {{prd?.quantity}}</h4>
         <div class="btn-group">
             <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
-            <button [disabled]="currPId==prdIds[0]" type="button" class="btn btn-primary"(click)="goPrevise()">Previce</button>
-            <button [disabled]="currPId==prdIds.length" type="button" class="btn btn-primary"(click)="goNext()">Next</button>
+            <button [disabled]="currPId==prdIds[0]" type="button" class="btn btn-secondary"(click)="goPrevise()">Previce</button>
+            <button [disabled]="currPId==prdIds.length" type="button" class="btn btn-success"(click)="goNext()">Next</button>
           </div>
     </div>
 </div>
