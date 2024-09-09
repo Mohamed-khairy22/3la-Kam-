@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { unsubscribe } from 'diagnostics_channel';
+import {  from, Observable } from 'rxjs';
 import { setInterval } from 'timers';
 
 @Injectable({
@@ -17,23 +18,42 @@ export class PromotionAdsService {
     ];
    }
 
-   getSchadualedAds(interfalInSec:number):Observable<string>
+   getSerialAds():Observable<string>
    {
-      return new Observable<string>((observer)=>{
-      // observer.next();
-      // observer.error();
-      // observer.complete();
-      let counter =0
-      let adsTimer= setInterval(()=>{
-        if(counter==this.addsList.length)
-          observer.complete();
-        if(this.addsList[counter]=="")
-          observer.error("Error: The ad is empty!");       
-          observer.next(this.addsList[counter]);
-          counter++;
-
-      },interfalInSec*1000)
-    });
-    
+    return from(this.addsList)
    }
+
+  //  getSchadualedAds(interfalInSec:number):Observable<string>
+  //  {
+      
+  //     return new Observable<string>((observer)=>{
+  //     // observer.next();
+  //     // observer.error();
+  //     // observer.complete();
+  //     let counter =0;
+  //     let adsTimer= setInterval(()=>{
+  //       console.log('in Interval');
+  //       if(counter==this.addsList.length)
+  //         {
+  //           observer.complete();
+  //         }
+  //       if(this.addsList[counter]=="")
+  //         {
+  //           observer.error("Error: The ad is empty!");
+  //         }       
+  //       observer.next(this.addsList[counter]);
+  //       counter++;
+
+  //     },interfalInSec*1000)
+  //     return {
+  //       unsubscribe(){
+  //       //Will be called:// 1- Error 2- Complete 3- unsubscribe()
+  //       clearInterval(adsTimer);
+  //       console.log("In Obs Unsubscribe...")
+  //       }
+  //       }
+        
+  //   });
+    
+  //  }
 }
