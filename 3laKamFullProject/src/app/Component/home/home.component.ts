@@ -1,22 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreData } from '../../ViewModel/store-data';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { PromotionAdsService } from '../../Services/promotion-ads.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor,NgIf,CommonModule],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-  storeInfo : StoreData;
-  isShown :boolean =true;
-  constructor(){
-    this.storeInfo= new StoreData("3la Kam?","https://picsum.photos/400/300",["Zara","pumma","H&M","Adidas"]);
+export class HomeComponent implements OnInit {
+  storeInfo: StoreData;
+  isShown: boolean = true;
+  constructor(private adService: PromotionAdsService) {
+    this.storeInfo = new StoreData("3la Kam?", "https://picsum.photos/400/300", ["Zara", "pumma", "H&M", "Adidas"]);
   }
-  togle(){
-    this.isShown=!this.isShown;
+  ngOnInit(): void {
+    let observer = {
+      next: (data: string) => {
+        console.log(data);
+      },
+      error: (err: string) => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("Ads finished :) ")
+      }
+    }
+    this.adService.getSchadualedAds(3).subscribe(observer);
+  }
+  togle() {
+    this.isShown = !this.isShown;
   }
 
 }
