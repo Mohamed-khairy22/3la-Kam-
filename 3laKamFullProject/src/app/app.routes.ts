@@ -14,7 +14,9 @@ export const routes: Routes = [
         {path:'products/:pid',component:ProductDetailsComponent},
         {path:'order',component:OrderMasterComponent}
     ]},
-    {path:'login',component:LoginComponent}
+    {path:'login',component:LoginComponent},
+    {path:'logout',component:LoginComponent}
+
     
 
 

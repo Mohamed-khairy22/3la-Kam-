@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { UserAuthService } from '../../Services/user-auth.service';
 
 
 @Component({
@@ -10,12 +11,13 @@ import { RouterModule } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent   {
-  mode:string=""
-  chaneMode(){
-    if(this.mode=="")
-      this.mode="dark"
-    else
-    this.mode=""
-  }
+  
+  constructor(private authService: UserAuthService)
+  {
 
+  }
+  isLogged():boolean
+  {
+    return this.authService.isUserLogged;
+  }
 }

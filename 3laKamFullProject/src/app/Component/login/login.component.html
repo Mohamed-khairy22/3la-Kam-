@@ -1,1 +1,8 @@
-<p>login works!</p>
+<div class="col-5" style="align-items:center">
+    <button [disabled]="isLogged()" type="button" class="btn btn-success m-3" (click)="login()">
+        Login
+    </button>
+    <button [disabled]="!(isLogged())" type="button" class="btn btn-danger m-3" (click)="logout()">
+        Logout
+    </button>
+</div>
