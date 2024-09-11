@@ -18,12 +18,12 @@ import { MainLayoutComponent } from './Component/main-layout/main-layout.compone
     SidebarComponent, 
     HeaderComponent, 
     FooterComponent, 
-    HomeComponent, 
+    HomeComponent,  
     ProductListComponent, 
     FormsModule, 
     LightBoxDirective, 
     OrderMasterComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

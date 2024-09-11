@@ -13,7 +13,7 @@
         <a class="nav-link" routerLink="/order" routerLinkActive="active" >Order</a>
         <a [hidden]="isLogged()" class="nav-link" routerLink="/login" routerLinkActive="active" >Login</a>
         <a [hidden]="!(isLogged())" class="nav-link" routerLink="" (click)="logout()">Logout</a>
-        <a [hidden]="!(isLogged())" disabled class="nav-link" routerLink="#">Welcome {{userName}}</a>
+        <p [hidden]="!(isLogged())" disabled class="nav-link" routerLink="#">welcome {{userName}}</p>
       </div>
     </div>
   </div>
