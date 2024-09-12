@@ -87,11 +87,29 @@ export class ProductsService {
       })
     );
   }
-  updateProduct(id:number)
+  updateProduct(pId:number,prd: Iproduct)
   {
-    
+    this.httpclint
+    .put(`${environment.apiUrl}product/${pId}`,JSON.stringify(prd),this.httpOptions)
+    .pipe(
+      retry(2),
+      catchError((err)=>{
+        console.log(err);
+        return throwError(()=> new Error(" error"));
+      })
+    );
   }
-  deleteProduct(id:number)
+  deleteProduct(pId:number):Observable<any>
+  
   {
+    console.log("product deleted"+ pId)
+   return this.httpclint.delete<any>(`${environment.apiUrl}product/${pId}`)
+    .pipe(
+      retry(2),
+      catchError((err)=>{
+        console.log(err);
+        return throwError(()=> new Error(" error"));
+      })
+    );
   }
 }
