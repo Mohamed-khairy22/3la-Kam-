@@ -1,4 +1,3 @@
-
 <!-- <section class="row">
     <div class="col-5">
         <label for="" class="form-label"> Search </label>
@@ -14,14 +13,14 @@
     </div>
     </section> -->
 <hr>
-<a  class="btn btn-success m-3" [routerLink]="['/product/add']"  >Add new product</a>
+<a class="btn btn-success m-3" [routerLink]="['/product/add']">Add new product</a>
 
 Today's Date: {{orderDate|date}}
 
 <div class="table-responsive">
     <table class="table ">
         <thead>
-            <tr  class="bg-primary p-3">
+            <tr class="bg-primary p-3">
                 <th>#</th>
                 <th>Name</th>
                 <th>Image</th>
@@ -31,18 +30,18 @@ Today's Date: {{orderDate|date}}
                 <th>Count</th>
                 <th>Details</th>
                 <th>Add to Cart</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             <!-- [class.d-none]="item.categoryID!=sentCatID"
             [style.background-color]="(item.quantity==0)?'yellow':'light-gray'" -->
             <ng-container *ngFor="let item of catFilter ;let i = index; trackBy:prdtracByFn">
-                <tr [class.d-none]="item.categoryId!=sentCatID && sentCatID!=0"
-                [class.table-warning]="item.quantity==0"
-                [class.table-primary]="item.quantity!=0">
+                <tr [class.d-none]="item.categoryId!=sentCatID && sentCatID!=0" [class.table-warning]="item.quantity==0"
+                    [class.table-primary]="item.quantity!=0">
                     <td>{{i+1}}</td>
                     <td>{{item.name}}</td>
-                    <td ><img LightBox="green" InitiColor="darkgray" [src]="item.imgUrl" alt="image"></td>
+                    <td><img LightBox="green" InitiColor="darkgray" [src]="item.imgUrl" alt="image"></td>
                     <td>
                         <!-- <div *ngIf="item.quantity!=0">{{item.quantity}}</div>
                     <div *ngIf="item.quantity==0">Out of Stock</div> -->
@@ -57,16 +56,17 @@ Today's Date: {{orderDate|date}}
                     <td>{{ item.price | currency:'USD':'code' }}</td>
                     <td>{{ item.price | USDtoEGP:44 | currency:'EGP' }}</td>
                     <td><input #count class="form-control" type="number"></td>
-                    <td><button type="button" class="btn btn-secondary"
-                        (click)="showDetails(item.id)">Details</button></td>
+                    <td><button type="button" class="btn btn-secondary" (click)="showDetails(item.id)">Details</button>
+                    </td>
                     <td><button type="button" class="btn btn-success"
-                            (click)="addToCart(item.id,item.name,item.price,count.value)"
-                            >Add</button></td>
+                            (click)="addToCart(item.id,item.name,item.price,count.value)">Add</button></td>
+                    <td><button type="button" class="btn btn-danger" (click)="deletePrd(item.id)">Delete</button>
+                    </td>
                 </tr>
             </ng-container>
         </tbody>
     </table>
 
-    
+
 </div>
 <br>

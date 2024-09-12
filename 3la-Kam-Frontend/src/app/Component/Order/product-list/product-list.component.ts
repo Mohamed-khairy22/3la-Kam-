@@ -9,11 +9,12 @@ import { NewCart } from '../../../ViewModel/new-cart';
 import { StaticProductsService } from '../../../Services/static-products.service';
 import { Router, RouterModule } from '@angular/router';
 import { ProductsService } from '../../../Services/products.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [FormsModule,LightBoxDirective,CommonModule,USDtoEGPPipe,RouterModule],
+  imports: [FormsModule,LightBoxDirective,CommonModule,USDtoEGPPipe,RouterModule,MatSnackBarModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
@@ -30,7 +31,9 @@ export class ProductListComponent implements OnChanges,OnInit {
   constructor(
               //  private staticPrdService : StaticProductsService,
               private prdService:ProductsService
-              ,private router:Router){
+              ,private router:Router
+              ,private snakbar:MatSnackBar
+            ){
     this.myOrder = new EventEmitter<NewCart>();
     // this.prdList=[
     //   {id:1,name:'Lenovo ideapad 320 Laptop',price:17000,quantity:1,imgURL:"https://fakeimg.pl/200x100",categoryID:1},
@@ -70,6 +73,17 @@ export class ProductListComponent implements OnChanges,OnInit {
     });
 
   }
+  deletePrd(id:number){
+    this.prdService.deleteProduct(id).subscribe(prd=>{
+      console.log(prd)
+      this.snakbar.open('Product deleted successfully', 'Close', {
+        duration: 3000,
+      });
+      this.router.navigateByUrl('/products')
+    });
+    
+  }
+
   prdtracByFn(index:number,prd:Iproduct):number
   {
     return prd.id;
