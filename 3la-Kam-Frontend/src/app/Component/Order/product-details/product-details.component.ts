@@ -4,6 +4,7 @@ import { StaticProductsService } from '../../../Services/static-products.service
 import { Iproduct } from '../../../Model/iproduct';
 import { CommonModule, Location } from '@angular/common';
 import { pid } from 'process';
+import { ProductsService } from '../../../Services/products.service';
 
 @Component({
   selector: 'app-product-details',
@@ -19,7 +20,8 @@ export class ProductDetailsComponent implements OnInit {
    prdIds:number[]=[];
 
   constructor(private activatedRoute: ActivatedRoute,
-    private prdService :StaticProductsService,
+    //  private prdService :StaticProductsService,
+    private servics :ProductsService,
     private location:Location,
     private router :Router
   ){}
@@ -28,7 +30,11 @@ export class ProductDetailsComponent implements OnInit {
     // this.currPId = Number (this.activatedRoute.snapshot.paramMap.get('pid'))
     this.activatedRoute.paramMap.subscribe((paramMap)=>{
       this.currPId= Number (paramMap.get('pid'))
-      this.prd =this.prdService.getPrdById(this.currPId)
+      //  this.prd =this.prdService.getPrdById(this.currPId)
+      this.servics.getPrdById(this.currPId).subscribe(p=>{
+        this.prd=p;
+      })
+
     });
     
     }
@@ -38,7 +44,10 @@ export class ProductDetailsComponent implements OnInit {
     }
     goPrevise()
     {
-      this.prdIds = this.prdService.getAllIds();
+      //  this.prdIds = this.prdService.getAllIds();
+      this.servics.getAllPrds().subscribe(id=>{
+        this.prdIds = id.map(i=>i.id);
+      });
       let currIndex=this.prdIds.findIndex(elem=>elem == this.currPId);
       if (currIndex>0)
       {
@@ -51,7 +60,10 @@ export class ProductDetailsComponent implements OnInit {
     }
     goNext()
     {
-      this.prdIds = this.prdService.getAllIds();
+      //  this.prdIds = this.prdService.getAllIds();
+      this.servics.getAllPrds().subscribe(id=>{
+        this.prdIds = id.map(i=>i.id);
+      });
       let currIndex=this.prdIds.findIndex(elem=>elem == this.currPId);
       if (currIndex<this.prdIds.length)
       {

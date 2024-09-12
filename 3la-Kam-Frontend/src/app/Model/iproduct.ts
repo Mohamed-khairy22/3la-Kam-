@@ -3,6 +3,6 @@ export interface Iproduct {
     name : string;
     price : number;
     quantity : number;
-    imgURL? : string;
-    categoryID : number;
+    imgUrl? : string;
+    categoryId : number;
 }

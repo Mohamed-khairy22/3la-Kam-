@@ -34,12 +34,12 @@ Today's Date: {{orderDate|date}}
             <!-- [class.d-none]="item.categoryID!=sentCatID"
             [style.background-color]="(item.quantity==0)?'yellow':'light-gray'" -->
             <ng-container *ngFor="let item of catFilter ;let i = index; trackBy:prdtracByFn">
-                <tr [class.d-none]="item.categoryID!=sentCatID && sentCatID!=0"
+                <tr [class.d-none]="item.categoryId!=sentCatID && sentCatID!=0"
                 [class.table-warning]="item.quantity==0"
                 [class.table-primary]="item.quantity!=0">
                     <td>{{i+1}}</td>
                     <td>{{item.name}}</td>
-                    <td ><img LightBox="green" InitiColor="darkgray" [src]="item.imgURL" alt="image"></td>
+                    <td ><img LightBox="green" InitiColor="darkgray" [src]="item.imgUrl" alt="image"></td>
                     <td>
                         <!-- <div *ngIf="item.quantity!=0">{{item.quantity}}</div>
                     <div *ngIf="item.quantity==0">Out of Stock</div> -->
