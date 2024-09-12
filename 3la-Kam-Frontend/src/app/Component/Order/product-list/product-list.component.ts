@@ -7,13 +7,13 @@ import { LightBoxDirective } from '../../../Directives/light-box.directive';
 import { USDtoEGPPipe } from '../../../Pipes/usdto-egp.pipe';
 import { NewCart } from '../../../ViewModel/new-cart';
 import { StaticProductsService } from '../../../Services/static-products.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductsService } from '../../../Services/products.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [FormsModule,LightBoxDirective,CommonModule,USDtoEGPPipe],
+  imports: [FormsModule,LightBoxDirective,CommonModule,USDtoEGPPipe,RouterModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })

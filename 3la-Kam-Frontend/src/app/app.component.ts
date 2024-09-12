@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { LightBoxDirective } from './Directives/light-box.directive';
 import { OrderMasterComponent } from "./Component/Order/order-master/order-master.component";
 import { MainLayoutComponent } from './Component/main-layout/main-layout.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @Component({
@@ -24,6 +25,7 @@ import { MainLayoutComponent } from './Component/main-layout/main-layout.compone
     LightBoxDirective, 
     OrderMasterComponent,
     MainLayoutComponent,
+    BrowserAnimationsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
