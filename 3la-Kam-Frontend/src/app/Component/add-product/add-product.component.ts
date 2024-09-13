@@ -10,37 +10,29 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [CommonModule,RouterModule,MatSnackBarModule,FormsModule],
+  imports: [CommonModule, RouterModule, MatSnackBarModule, FormsModule],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.scss'
 })
 export class AddProductComponent {
+  newPrd: Iproduct = {} as Iproduct
   constructor(
-              private proService:ProductsService,
-              private snackBar: MatSnackBar,
-              private router:Router
-  ){
+    private proService: ProductsService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {
 
   }
 
-  addNewPrd(name:string,price:any,quantity:any,img:string,category:any)
-  {
-    let newPrice=Number (price);
-    let newQuantity = Number(quantity);
-    let newCategory = Number(category)
-    let newPrd:Iproduct=
-          {id:0,name:name,price:newPrice,quantity:newQuantity,imgUrl:img,categoryId:newCategory};
-          this.proService.addProduct(newPrd).subscribe((prd)=>{
-            console.log(prd)
-            this.snackBar.open('Product added successfully', 'Close', {
-              duration: 3000,
-              
-            });
-            this.router.navigateByUrl('/products')
+  addNewPrd() {
+    this.proService.addProduct(this.newPrd).subscribe((prd) => {
+      console.log(prd)
+      this.snackBar.open('Product added successfully', 'Close', {
+        duration: 3000,
+      });
+      this.router.navigateByUrl('/products')
 
-          });
-
-
+    });
   }
 
 }
