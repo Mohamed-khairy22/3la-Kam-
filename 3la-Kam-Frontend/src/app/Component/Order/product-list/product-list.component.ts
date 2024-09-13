@@ -74,13 +74,18 @@ export class ProductListComponent implements OnChanges,OnInit {
 
   }
   deletePrd(id:number){
-    this.prdService.deleteProduct(id).subscribe(prd=>{
-      console.log(prd)
-      this.snakbar.open('Product deleted successfully', 'Close', {
-        duration: 3000,
+    if(confirm("Are you sure to delete the product? ")) {
+      this.prdService.deleteProduct(id).subscribe(prd=>{
+        console.log(prd)
+        this.snakbar.open('Product deleted successfully', 'Close', {
+          duration: 3000,
+        });
+        this.router.navigateByUrl('')
+        this.router.navigateByUrl('/products')
+  
       });
-      this.router.navigateByUrl('/products')
-    });
+    }
+    
     
   }
 
@@ -95,6 +100,10 @@ export class ProductListComponent implements OnChanges,OnInit {
   showDetails(pid:number)
   {
     this.router.navigate(['/products',pid]);
+  }
+  editPrd(pid:number)
+  {
+    this.router.navigate(['/product/add',pid]);
   }
 
   

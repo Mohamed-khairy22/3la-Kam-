@@ -16,6 +16,8 @@ export const routes: Routes = [
         {path:'products/:pid',component:ProductDetailsComponent},
         {path:'order',component:OrderMasterComponent,canActivate:[authGuard]},
         {path:'product/add',component:AddProductComponent},
+        {path:'product/add/:pid',component:AddProductComponent},
+
 
     ]},
     {path:'login',component:LoginComponent},

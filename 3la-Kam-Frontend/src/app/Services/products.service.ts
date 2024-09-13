@@ -87,10 +87,10 @@ export class ProductsService {
       })
     );
   }
-  updateProduct(pId:number,prd: Iproduct)
+  updateProduct(pId:number,prd: Iproduct):Observable<any>
   {
-    this.httpclint
-    .put(`${environment.apiUrl}product/${pId}`,JSON.stringify(prd),this.httpOptions)
+    return this.httpclint
+    .put<any>(`${environment.apiUrl}product/${pId}`,JSON.stringify(prd),this.httpOptions)
     .pipe(
       retry(2),
       catchError((err)=>{

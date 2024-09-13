@@ -1,40 +1,48 @@
 <div class="container">
-<h2>Add Product</h2>
+<h2 *ngIf="newPrd.id==0">Add Product</h2>
+<h2 *ngIf="newPrd.id!=0">Update Product</h2>
 
-<form #myform (ngSubmit)="addNewPrd()">
+
+<form #myform="ngForm" (ngSubmit)="addNewPrd()">
 
     <div class="form-group">
         <label for="Name">Product Name:</label>
-        <input  type="text" class="form-control" id="Name" placeholder="Enter product name" name="Name"[(ngModel)]="newPrd.name">
+        <input #pName="ngModel"  type="text" class="form-control" id="Name" placeholder="Enter product name" name="Name"[(ngModel)]="newPrd.name" required>
     </div>
+    <small class="text-danger" *ngIf="pName.errors?.['required'] && pName.touched" >* Name is required</small>
 
     <div class="form-group">
         <label for="price">Price:</label>
-        <input  type="text" class="form-control" id="price" placeholder="Enter price" name="price"[(ngModel)]="newPrd.price">
+        <input #pPrice="ngModel"  type="text" class="form-control" id="price" placeholder="Enter price" name="price"[(ngModel)]="newPrd.price" required>
     </div>
+    <small class="text-danger" *ngIf="pName.errors?.['required'] && pPrice.touched" >* Price is required</small>
 
     <div class="form-group">
         <label for="quantity">Quantity:</label>
-        <input  type="text" class="form-control" id="quantity" placeholder="Enter quantity" name="quantity" [(ngModel)]="newPrd.quantity">
+        <input #pquantity="ngModel" type="text" class="form-control" id="quantity" placeholder="Enter quantity" name="quantity" [(ngModel)]="newPrd.quantity" required>
     </div>
+    <small class="text-danger" *ngIf="pName.errors?.['required'] && pquantity.touched" >* Quantity is required</small>
 
     <div class="form-group">
         <label for="img">Image URL:</label>
-        <input  type="text" class="form-control" id="img" placeholder="Enter image url" name="img" [(ngModel)]="newPrd.imgUrl">
+        <input #pImg="ngModel" type="file" class="form-control" id="img" placeholder="Select image" name="img" [(ngModel)]="newPrd.imgUrl" required>
     </div>
+    <small class="text-danger" *ngIf="pName.errors?.['required'] && pImg.touched" >* Image is required</small>
 
     <div>
         <div class="form-group">
             <label for="" class="form-label">Category</label>
-            <select  class="form-select form-select-lg" name="Category" id="Category" [(ngModel)]="newPrd.categoryId">
-                <option selected value=0>Select Category</option>
+            <select #pCategory="ngModel" class="form-select form-select-lg" name="Category" id="Category" [(ngModel)]="newPrd.categoryId" required>
+                <option selected >Select Category</option>
                 <option value=1>Laptop</option>
                 <option value=2>Tablet</option>
                 <option value=3>Mobile</option>
             </select>
         </div>
     </div>
+    <small class="text-danger" *ngIf="pName.errors?.['required'] && pCategory.touched" >* Category is required</small>
+
     <br>
-    <button type="submit" class="btn btn-success" value="Send">Add product</button>
+    <button [disabled]="!myform.valid" type="submit" class="btn btn-success" value="Send">Add product</button>
 </form> 
 </div>

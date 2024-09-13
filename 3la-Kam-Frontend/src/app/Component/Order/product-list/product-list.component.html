@@ -30,6 +30,7 @@ Today's Date: {{orderDate|date}}
                 <th>Count</th>
                 <th>Details</th>
                 <th>Add to Cart</th>
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -60,6 +61,8 @@ Today's Date: {{orderDate|date}}
                     </td>
                     <td><button type="button" class="btn btn-success"
                             (click)="addToCart(item.id,item.name,item.price,count.value)">Add</button></td>
+                    <td><button type="button" class="btn btn-primary" (click)="editPrd(item.id)">Edit</button>
+                    </td>
                     <td><button type="button" class="btn btn-danger" (click)="deletePrd(item.id)">Delete</button>
                     </td>
                 </tr>
