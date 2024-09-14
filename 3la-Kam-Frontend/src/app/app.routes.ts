@@ -12,7 +12,7 @@ export const routes: Routes = [
     {path:'',component:MainLayoutComponent,children:[
         {path:'',redirectTo:"/home",pathMatch:"full"},//Defult path
         {path:'home',component:HomeComponent},
-        {path:'products',component:ProductListComponent},
+        {path:'products',component:ProductListComponent,canActivate:[authGuard]},
         {path:'products/:pid',component:ProductDetailsComponent},
         {path:'order',component:OrderMasterComponent,canActivate:[authGuard]},
         {path:'product/add',component:AddProductComponent},
